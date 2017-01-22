@@ -12,6 +12,10 @@ load('steering_vector.mat')
 
 w=(1/N)*ds.';
 
+% Generamos la matriz de bloqueo
+
+
+
 %Cargar las señales
 Leer_Array_Signals;
 
