@@ -14,6 +14,7 @@ w=(1/N)*ds.';
 
 % Generamos la matriz de bloqueo
 
+block = [zeros(1,N-1)' -1*eye(N-1)] + [eye(N-1) zeros(1,N-1)'];
 
 
 %Cargar las señales
