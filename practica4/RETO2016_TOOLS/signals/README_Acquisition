@@ -1,0 +1,226 @@
+
+This directory contains multi-microphone data recorded by Tom Sullivan
+(tms@cs.cmu.edu) at Carnegie Mellon University.
+
+All data is sampled at 16 kHz, 16-bit linear sampling.  
+
+There are 3 directories included:
+
+15element -- Recorded at Carnegie Mellon University.
+
+8element -- Recorded at Carnegie Mellon University.
+
+rutdata -- Recorded at Rutgers University.
+
+The contents of each directory are described individually in more detail
+below.
+
+
+15element
+---------
+These utterances were collected with a 15-element array. The array spacing is 
+such that it is actually three 7-element sub-arrays (with different spacing) 
+interleaved (ala. Jim Flanagan's array at ATT/Rutgers U.)  Some elements are 
+shared between the sub-arrays.  
+
+If the minimum spacing of this array is N-cm.  The array looks roughly like
+this:
+
+1    2  3  4 5 6 7 8 9 10 11 12  13  14    15
+
+Where element 8 is in the exact center of the array.
+
+Elements 5, 6, 7, 8, 9, 10, and 11 are a 7 element array with a spacing of 
+N cm between elements.
+
+Elements 3, 4, 6, 8, 10, 12 and 13 are a 7 element array with a spacing of 
+2*N cm between elements.
+
+Elements 1, 2, 4, 8, 12, 14 and 15 are a 7 element array with a spacing of 
+4*N cm between elements.
+
+Of course you can feel free to combine the elements in any manner you 
+desire for your own experiments.  We used them to study different element
+spacing from data that was collected simultaneously to each of the
+sub-arrays.
+
+Within this directory are files of the form: 
+
+{utterance}-{subject}-{microphone_type}.adc
+
+{utterance} is either an* or cen*, where "*" is a number.  These are
+alphanumeric and census utterances in the AN4 dataset used often here
+at CMU.  
+
+{subject} is the same 4-letter code used to name the sub-directories.
+
+{microphone_type} is the type of microphone used and a key into the 
+experimental conditions.  "senn" is the Sennheiser HMD414 headset 
+closetalking microphone, used in every set as a control.  "arr" is a
+microphone array having multiple elements.  All array elements are
+Panasonic WD-063 noise cancelling electret condenser elements.
+
+There are 6 data sets collected with this array:
+
+1) This set was collected in a noisy computer lab at Carnegie Mellon Univ.
+with an array of 15-elements with a minimum spacing of 3 cm.  It is denoted 
+by "arr3A" for the 15 array elements and "senn3" for the closetalk.  The 
+subject sat one meter from the center of the array.
+
+Ex: 
+
+an101-mtms-arr3A.adc  (15-channel array, 3 cm minimum spacing)
+an101-mtms-senn3.adc  (closetalking control signal for above)
+
+2) This set was collected in the same noisy lab as above but with the
+15-element array with a minimum spacing of 4 cm.  It is denoted by
+"arr4A" and "senn4" for the closetalk.  The subject sat one meter from
+the center of the array.
+
+Ex: 
+
+an101-mtms-arr4A.adc  (15-channel array, 4 cm minimum spacing)
+an101-mtms-senn4.adc  (closetalking control signal for above)
+
+3) This set was collected in a conference room with the 15-element array 
+with a minimum spacing of 4 cm.  The conference room is larger than the
+noisy lab, but didn't have all of the computer fans.  It is denoted by
+"arrC1A" and "sennC1" for the closetalk.  The subject sat one meter from
+the center of the array.
+
+Ex: 
+
+an101-mtms-arrC1A.adc  (15-channel array, 4 cm minimum spacing, 1 meter dist.)
+an101-mtms-sennC1.adc  (closetalking control signal for above)
+
+4) This set was collected in the same conference room as 4) above with the 
+15-element array with a minimum spacing of 4 cm.  It is denoted by
+"arrC1A" and "sennC1" for the closetalk.  The subject sat three meters from
+the center of the array.
+
+Ex: 
+
+an101-mtms-arrC3A.adc  (15-channel array, 4 cm minimum spacing, 3 meter dist.)
+an101-mtms-sennC3.adc  (closetalking control signal for above)
+
+5) This set was collected the same conference room as above with the 
+15-element array with a minimum spacing of 4 cm, but also had an AM talk-radio
+jamming signal at approximately 45 degrees off-axis from the center of the
+array, competing with the speaker.  It is denoted by "arrCR1A" and "sennCR1" 
+for the closetalk.  The subject sat one meter from the center of the array.
+
+Ex: 
+
+an101-mtms-arrCR1A.adc  (15-channel array, 4 cm minimum spacing, 1 meter 
+			dist., radio jamming signal)
+an101-mtms-sennCR1.adc  (closetalking control signal for above)
+
+6) This set was collected the same conference room as above with the 
+15-element array with a minimum spacing of 4 cm, but also had an AM talk-radio
+jamming signal at approximately 45 degrees off-axis from the center of the
+array, competing with the speaker.  It is denoted by "arrCR1A" and "sennCR1" 
+for the closetalk.  The subject sat three meters from the center of the array.
+
+Ex: 
+
+an101-mtms-arrCR3A.adc  (15-channel array, 4 cm minimum spacing, 3 meter 
+			dist., radio jamming signal)
+an101-mtms-sennCR3.adc  (closetalking control signal for above)
+
+
+8element
+--------
+There are ten "subject" sub-directories included.  Their names are each four
+letters long.  The first letter denotes the gender of the speaker ("m"
+or "f").  All data we've collected thus far used only male speakers.
+The final three letters are the initials of the subject.  Hence "mtms" is
+a male speaker with the initials TMS.
+
+Within each subject's sub-directory are files of the form: 
+
+{utterance}-{subject}-{microphone_type}.adc
+
+{utterance} is either an* or cen*, where "*" is a number.  These are
+alphanumeric and census utterances in the AN4 dataset used often here
+at CMU.  
+
+{subject} is the same 4-letter code used to name the sub-directories.
+
+{microphone_type} is the type of microphone used and a key into the 
+experimental conditions.  "senn" is the Sennheiser HMD414 headset 
+closetalking microphone, used in every set as a control.  "arr" is a
+microphone area having multiple elements.  All array elements are
+Panasonic WD-063 noise cancelling electret condenser elements.
+
+There are 3 different data sets contained in these directories.  They are
+listed as follows:
+
+This set contains 10 male speakers each speaking 14 utterances.  The
+microphone array used had eight (8) elements, and these utterances are
+denoted by "arrA" as the {microphone_type}.  The 8 elements were spaced
+linearly and with a spacing of 7 cm between elements.  The subject sat 
+directly in front of the array at a distance of 1 meter from the center.
+A pair of Crown PZM6FS microphones were also used to collect a stereo pair
+of Crown PZM signals to compare the performance of a quality set of 
+omnidirectional microphones to the Panasonic WD-063 array elements.
+The closetalking control signal is denoted by "senn" only.  The set was
+collected in a noisy computer lab at Carnegie Mellon Univ. with many 
+computer and disk-drive fans.
+
+Ex:
+
+an101-mtms-arrA.adc  (8-channel array)
+an101-mtms-pzmS.adc  (stereo pair of PZM6FS microphones)
+an101-mtms-senn.adc  (closetalking control signal)
+
+rutdata
+-------
+
+These data were collected at the CAIP Center at Rutgers University in 1991 
+with the help of Jim Flanagan and Joe French.  
+
+The experimental setup consisted of two 23-element microphone arrays built
+at ATT Bell Labs, a Crown PZM6FS microphone, and a Sennheiser HMD414 head-
+mounted closetalking microphone.  The arrays had 23 microphone elements each
+(comprising three interleaved arrays of 11-elements each).  One of the arrays 
+had a bandwidth of 8kHz (standard DARPA speech bandwidth) and the other a 
+bandwidth of 4kHz (standard telephone speech bandwidth).
+
+There are two sub-directories:  1meter and 3meters.  These directories refer
+to the distance of the speaker from the center of the microphone array.
+Within each directory are sub-directories, one for each speaker.
+
+Within each subject's sub-directory are files of the form: 
+
+{utterance}-{subject}-{microphone_type}.adc
+
+{utterance} is either an* or cen*, where "*" is a number.  These are
+alphanumeric and census utterances in the AN4 dataset used often here
+at CMU.  
+
+{subject} is the same 4-letter code used to name the sub-directories.
+
+{microphone_type} is the type of microphone used and a key into the 
+experimental conditions.  "sen" is the Sennheiser HMD414 headset 
+closetalking microphone, used in every set as a control.  "pzm" is a
+Crown PZM6FS microphone, "arrA(1m or 3m)" is a 8kHZ bandwidth array described
+above, and "arrB(1m or 3m) is a 4kHZ bandwidth array as describe above.  All 
+array elements are Panasonic WD-063 noise cancelling electret condenser 
+elements.
+
+The arrA and arrB files in this data set are monophonic files.  They are
+created by combining the array element outputs in real-time via hardware
+via delay and sum beamforming.
+
+------------------------
+The sentence transcripts for each of the files in "15element" and 8element" 
+are contained in the "transcripts" directory.
+
+The sentence transcripts for each of the files in "rutdata" are contained 
+in the "rutdata/transcripts/trans{1m,3m}" directories.
+------------------------
+
+The file ad.h in this directory is a C "include" file that contains the
+structure of the soundfile headers found on the .adc files.
+
+

@@ -1,0 +1,20 @@
+function [ s_d ] = lms_eq(ak,xbloqueo,xout,N,mu)
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+
+%     E = 10e-5;
+
+ya=a*xbloqueo(:,1);
+yout=xout(1)-ya;
+
+    for k = 2:1:length(xbloqueo)
+        
+        xk = xbloqueo(:,k);
+        yk = a*xk;
+        s_d(k)=;
+        err = const(s_d(k-u-Nini-Ntrain)+1)-yk;
+        wk = wk + (mu*err*conj(xk))/((xk'*xk));    
+
+    end
+end
+
