@@ -1,18 +1,15 @@
-function [ yout ] = lms_eq(ak,xbloqueo,xout,N,mu)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+function [ yout, ak ] = lms_eq(ak,xbloqueo,xout,mu)
+    %UNTITLED2 Summary of this function goes here
+    %   Detailed explanation goes here
 
-     E = 10e-5;
+    E = 10e-5;
 
-    for k = 1:1:length(xbloqueo)
-        
-        xk = xbloqueo(:,k);
-        yk = ak*xk;
-        
-        yout(k) = xout(k)-yk;
-        err= yout(k)*xk;
-        ak = ak + (mu*err'.*conj(xk'))/(E+(xk'*xk));    
+    xk = xbloqueo;%14xL/2
+    yk = ak*xk; %ak debe ser un vector. 1xL/2
+    yout = xout'-yk; %Salida para una trama 1xL/2
+    err= yout*xk';%1x14
+    ak = ak + (mu*err)./(E+(diag(xk*xk'))');
+    
 
-    end
 end
 
