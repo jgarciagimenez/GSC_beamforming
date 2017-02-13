@@ -31,9 +31,9 @@ mat_temp = zeros(15,L/2+1);
 matout = zeros(N,Nsamp);
 
 ini=1;
-ak = zeros(1,14);
+ak = zeros(14,L/2+1);
 %mu = 0.002271;
-%mu = 0.0003;
+mu = 0.0004;
 
 for k=1:ntrama-1
    xtemp=zeros;
@@ -77,12 +77,12 @@ end
 
 
 xfinal=xout;
-%soundsc(xfinal,Fs)
+soundsc(xfinal,Fs)
 
 %Audio Array
 array = 'array.wav';
 %audiowrite(array,xfinal,Fs)
-audiowrite(array,xfinal/max(xfinal),Fs,'BitsPerSample',16);
+audiowrite(array,xfinal/max(max(xfinal), -min(xfinal)),Fs,'BitsPerSample',16);
 %soundsc(xout,Fs);
 
 %Cargar señal limpia
@@ -100,7 +100,7 @@ xlimpia=data;
 %Audio señal limpia
 limpia = 'limpia.wav';
 %audiowrite(limpia,xlimpia,Fs)
-audiowrite(limpia,xlimpia/max(xlimpia),Fs,'BitsPerSample',16);
+audiowrite(limpia,xlimpia/max(max(xlimpia),-min(xlimpia)),Fs,'BitsPerSample',16);
 %Comparación
-pesq(limpia,array)
+pesq=pesq(limpia,array)
 clear all;
