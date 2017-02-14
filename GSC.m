@@ -10,8 +10,24 @@ f=1:L/2;
 win=sqrt(hanning(L)); %Ventana de Hanning
 win_mat = repmat(win,1,N)';
 load('steering_vector.mat')
+% angle2 = angle;
+clear angle
 
-w=(1/N)*ds.';
+% w=ds.';                 %%%%%%%%%%%%5 Método Ai/N
+
+% ds2 = exp(j*angle(ds));       %%%%%%%%%%%%%% método 1/N
+% w=ds2.';
+
+% ds2 = exp(j*angle(ds));      %%%%%%%%%%%%% Método 1/Ai
+% w = ds2.';
+% Ai = abs(ds)';
+
+
+ds2 = exp(j*angle(ds));      %%%%%%%%%%%%% Método Ai/ds^2
+w = ds2.';
+Ai = abs(ds)';
+mod_ds = ds * ds';
+Ai2 = (Ai/mod_ds); 
 
 % Generamos la matriz de bloqueo
 
@@ -33,8 +49,7 @@ matout = zeros(N,Nsamp);
 ini=1;
 ak = zeros(14,L/2+1);
 %mu = 0.002271;
-mu = 0.0004;
-
+mu = 0.000;
 for k=1:ntrama-1
    xtemp=zeros;
     for nc=1:N
@@ -42,14 +57,24 @@ for k=1:ntrama-1
         
         mat_temp(nc,:) = (w(:,nc).*x1(1:(L/2)+1)).';
         
-        xtemp=xtemp+w(:,nc).*x1(1:(L/2)+1); %Multiplicamos por el vector de pesos y vamos sumando cada uno de los canales, 
-                                            %a fin de tener una seÃ±al resultante constructiva
-                                            
-                                            
-                                            
-                                            
-                                            
         
+% % % % % %      Este xtemp vale para métodos 1/N y Ai/N  
+%         xtemp=xtemp+(1/N)*w(:,nc).*x1(1:(L/2)+1); %Multiplicamos por el vector de pesos y vamos sumando cada uno de los canales, 
+                                            %a fin de tener una seÃ±al resultante constructiva
+             
+                                            
+                                            
+% % % % % % % % % % % % % % % % % % % % % % % % % % %     Método 1/Ai                                    
+%         Ainvers = (1./Ai);                                    
+%         xtemp=xtemp+Ainvers(:,nc).*w(:,nc).*x1(1:(L/2)+1);                                
+
+
+
+% % % % % % % % % % % % % % % % % % % % %  % % % % % % Método Ai/||ds||^2;
+        
+                                            
+         xtemp=xtemp+Ai2(:,nc).*w(:,nc).*x1(1:(L/2)+1); 
+
     end
     %matout(:,ini:ini+L-1)=matout(:,ini:ini+L-1)+win_mat.*real(ifft([mat_temp conj(mat_temp(:,end-1:-1:2))],[],1)); %Formamos la otra mitad de xtemp, hacemos la ifft y la multiplicamos por la ventana.
    
