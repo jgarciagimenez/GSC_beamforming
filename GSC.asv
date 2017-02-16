@@ -1,4 +1,4 @@
-clear all
+%clear all
 
 %Parametros:
 Fs=16000; %frecuencia de muestreo
@@ -10,20 +10,13 @@ f=1:L/2;
 win=sqrt(hanning(L)); %Ventana de Hanning
 win_mat = repmat(win,1,N)';
 load('steering_vector.mat')
-
+% angle2 = angle;
 clear angle
-
-
 
 w=(1/N)*ds.';                %%%%%%%%%%%% Método Ai/N 
 
-
-
-% ds2 = exp(j*angle(ds));       %%%%%%%%%%%%%% método normalizar vector, ya
-                                      %%%%%%%% haría falta el 1/N
+% ds2 = exp(j*angle(ds));       %%%%%%%%%%%%%% método 1/N
 % w=ds2.';
-
-
 
 % ds2 = exp(j*angle(ds));      %%%%%%%%%%%%% Método 1/Ai
 % w = ds2.';
@@ -56,15 +49,15 @@ matout = zeros(N,Nsamp);
 ini=1;
 ak = zeros(14,L/2+1);
 %mu = 0.002271;
-mu = 0.0003;
+mu = 0.000;
 for k=1:ntrama-1
    xtemp=zeros;
     for nc=1:N
         x1=fft((win.*x{nc}(ini:ini+(L-1)))); %Aplicamos la ventana de Hanning a cada trama de cada canal y le hacemos la FFT
         
-        mat_temp(nc,:) = (w(:,nc).*x1(1:(L/2)+1)).';  % matriz auxiliar para pasar los canales sincronizados a la matriz de bloqueo
+        mat_temp(nc,:) = (w(:,nc).*x1(1:(L/2)+1)).';
         
-% % % % % %      Este xtemp vale para métodos  Ai/N  
+% % % % % %      Este xtemp vale para métodos 1/N y Ai/N  
        xtemp=xtemp+w(:,nc).*x1(1:(L/2)+1); %Multiplicamos por el vector de pesos y vamos sumando cada uno de los canales, 
                                             %a fin de tener una seÃ±al resultante constructiva
              
@@ -84,8 +77,8 @@ for k=1:ntrama-1
     end
     %matout(:,ini:ini+L-1)=matout(:,ini:ini+L-1)+win_mat.*real(ifft([mat_temp conj(mat_temp(:,end-1:-1:2))],[],1)); %Formamos la otra mitad de xtemp, hacemos la ifft y la multiplicamos por la ventana.
    
-    x2 = B*mat_temp;                          % Aplicamos la matriz de bloqueo a trama de los 15 canales                            
-    [yout, ak] = lms_eq(ak,x2,xtemp,mu);      % se hace la parte adaptable
+    x2 = B*mat_temp;                                    
+    [yout, ak] = lms_eq(ak,x2,xtemp,mu);
         
         
     xout(ini:ini+L-1)=xout(ini:ini+L-1)+win.*real(ifft([yout'; conj(yout(end-1:-1:2))'])); %Formamos la otra mitad de xtemp, hacemos la ifft y la multiplicamos por la ventana.
@@ -95,7 +88,17 @@ end
 % xout es la salida del Beam Forming
 
 
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % columna=z(u+Nini+1:u+Nini+Ntrain);
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % fila=z(u+Nini+1:-1:u+Nini-M+1);
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % matriz Z para calcular el filtro
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % Z=toeplitz(columna,fila);
+
+
+
 xfinal=xout;
+soundsc(xfinal,Fs)
 
 %Audio Array
 array = 'array.wav';
@@ -121,6 +124,4 @@ limpia = 'limpia.wav';
 audiowrite(limpia,xlimpia/max(max(xlimpia),-min(xlimpia)),Fs,'BitsPerSample',16);
 %ComparaciÃ³n
 pesq=pesq(limpia,array)
-
-soundsc(xfinal,Fs)
-
+clear all;
