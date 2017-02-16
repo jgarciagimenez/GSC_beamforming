@@ -13,7 +13,7 @@ load('steering_vector.mat')
 % angle2 = angle;
 clear angle
 
-% w=ds.';                 %%%%%%%%%%%%5 Método Ai/N
+w=(1/N)*ds.';                %%%%%%%%%%%%5 Método Ai/N
 
 % ds2 = exp(j*angle(ds));       %%%%%%%%%%%%%% método 1/N
 % w=ds2.';
@@ -23,11 +23,11 @@ clear angle
 % Ai = abs(ds)';
 
 
-ds2 = exp(j*angle(ds));      %%%%%%%%%%%%% Método Ai/ds^2
-w = ds2.';
-Ai = abs(ds)';
-mod_ds = ds * ds';
-Ai2 = (Ai/mod_ds); 
+% ds2 = exp(j*angle(ds));      %%%%%%%%%%%%% Método Ai/ds^2
+% w = ds2.';
+% Ai = abs(ds)';
+% mod_ds = ds * ds';
+% Ai2 = (Ai/mod_ds); 
 
 % Generamos la matriz de bloqueo
 
@@ -49,7 +49,7 @@ matout = zeros(N,Nsamp);
 ini=1;
 ak = zeros(14,L/2+1);
 %mu = 0.002271;
-mu = 0.000;
+mu = 0.0003;
 for k=1:ntrama-1
    xtemp=zeros;
     for nc=1:N
@@ -59,7 +59,7 @@ for k=1:ntrama-1
         
         
 % % % % % %      Este xtemp vale para métodos 1/N y Ai/N  
-%         xtemp=xtemp+(1/N)*w(:,nc).*x1(1:(L/2)+1); %Multiplicamos por el vector de pesos y vamos sumando cada uno de los canales, 
+       xtemp=xtemp+w(:,nc).*x1(1:(L/2)+1); %Multiplicamos por el vector de pesos y vamos sumando cada uno de los canales, 
                                             %a fin de tener una seÃ±al resultante constructiva
              
                                             
@@ -73,7 +73,7 @@ for k=1:ntrama-1
 % % % % % % % % % % % % % % % % % % % % %  % % % % % % Método Ai/||ds||^2;
         
                                             
-         xtemp=xtemp+Ai2(:,nc).*w(:,nc).*x1(1:(L/2)+1); 
+%          xtemp=xtemp+Ai2(:,nc).*w(:,nc).*x1(1:(L/2)+1); 
 
     end
     %matout(:,ini:ini+L-1)=matout(:,ini:ini+L-1)+win_mat.*real(ifft([mat_temp conj(mat_temp(:,end-1:-1:2))],[],1)); %Formamos la otra mitad de xtemp, hacemos la ifft y la multiplicamos por la ventana.
@@ -95,9 +95,6 @@ end
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % matriz Z para calcular el filtro
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % Z=toeplitz(columna,fila);
-
-
-
 
 
 
