@@ -29,7 +29,7 @@ w=(1/N)*ds.';                %%%%%%%%%%%% Método Ai/N
 
 
 % ds2 = exp(j*angle(ds));       %%%%%%%%%%%%%% método normalizar vector, ya
-                                      %%%%%%%% haría falta el 1/N
+%                                       %%%%%%%% haría falta el 1/N
 % w=ds2.';
 
 
@@ -65,7 +65,8 @@ matout = zeros(N,Nsamp);
 ini=1;
 ak = zeros(14,L/2+1);
 %mu = 0.002271;
-mu = 0.0003;
+mu=0.0003;
+
 for k=1:ntrama-1
    xtemp=zeros;
     for nc=1:N
@@ -86,8 +87,8 @@ for k=1:ntrama-1
 
 
 % % % % % % % % % % % % % % % % % % % % %  % % % % % % Método Ai/||ds||^2;
-        
-                                            
+%         
+%                                             
 %          xtemp=xtemp+Ai2(:,nc).*w(:,nc).*x1(1:(L/2)+1); 
 
     end
