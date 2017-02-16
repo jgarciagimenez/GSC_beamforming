@@ -1,6 +1,15 @@
 clear all
 
-%Parametros:
+%% GSC Beamforming
+%
+%  Autores -> Juan Manuel López Torralba
+%             Jose Manuel Garcia Giménez
+%             Ismael Yeste Espín
+%             Daniel Melgarejo García
+
+
+% Definición de Parametros:
+
 Fs=16000; %frecuencia de muestreo
 nc=15;    %numero de canales
 L=400;    %longitud de la STFT
